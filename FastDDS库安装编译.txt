@@ -1,0 +1,68 @@
+编译FastDDS库需要cmake 3.20以上版本，所以需要先安装新版本的cmake工具
+
+cmake 3.27.7安装
+----------------------------
+url: https://cmake.org/download
+步骤：
+    configure
+    make
+    make install
+
+FastDDS库安装
+-----------------------------
+1. fast-cdr
+    git clone --branch v2.2.0 https://github.com/eProsima/Fast-CDR.git --depth 1
+    cd Fast-CDR
+    mkdir build
+    cd build
+    cmake ..
+    make
+    sudo make install
+
+2. asio
+    git clone --branch asio-1-29-0 https://github.com/chriskohlhoff/asio.git --depth 1
+    cd asio
+    ./autogen.sh
+    ./configure
+    make
+    sudo make install
+
+3. tinyXML
+    git clone --branch 10.0.0 https://github.com/leethomason/tinyxml2.git --depth 1
+    cd tinyxml2
+    mkdir build
+    cd build
+    cmake .. -DBUILD_SHARED_LIBS=ON
+    make
+    sudo make install
+
+4. foonathan_memory
+    git clone --branch v0.7-3 https://github.com/foonathan/memory.git --depth 1
+    cd memory
+    mkdir build
+    cmake ..
+    make
+    sudo make install
+
+5. fast-dds
+    git clone --branch v2.14.0 https://github.com/eProsima/Fast-DDS.git --depth 1
+    cd Fast-DDS
+    mkdir build
+    cd build
+    cmake ..
+    make
+    sudo make install
+
+注意: 当前所选用的fast-dds库需对应版本fast-dds-gen生成编解码源码文件
+    对应版本gen工具安装
+    git clone --branch v3.3.0 https://github.com/eProsima/Fast-DDS-Gen.git --depth 1
+    cd Fast-DDS-Gen
+    ./gradlew assemble
+
+    如果安装提示关于openjdk库相关的错误，可能是因为环境未安装Java库或Java库版本不对，建议直接安装openjdk17的库
+    以解决相关报错问题。
+    openjdk17安装命令：
+        sudo apt-get install openjdk-17-jdk -y
+
+    openjdk17安装完成后再次执行./gradlew assemble即可完成Gen工具的安装
+
